@@ -1,4 +1,4 @@
-# Docker Compose理解之路
+# Docker Compose透解之路
 
 ## 官方简单引导
 
