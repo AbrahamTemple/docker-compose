@@ -94,7 +94,6 @@ networks:
 ## 复杂案例进阶深化
 
 ``` yml
-``` yml
 version: '3.9'
 services:
     db:
@@ -135,5 +134,4 @@ services:
         volumes:
             - .logsnginxvarlognginxcached
             - .symfonyvarwwwsymfonycached
-```
 ```
