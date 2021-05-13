@@ -43,7 +43,7 @@ services:
       - sc-net
     ports:
       - 9411:9411
-    # es和rabbitmq结合使用,辅组es异步查询
+    # es和rabbitmq结合使用,促进es异步搜索
     environment:
       - RABBIT_ADDRESSES=rabbitmq:5672
       - RABBIT_MQ_PORT=5672
