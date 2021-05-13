@@ -43,6 +43,7 @@ services:
       - sc-net
     ports:
       - 9411:9411
+    # es和rabbitmq结合使用,辅组es异步查询
     environment:
       - RABBIT_ADDRESSES=rabbitmq:5672
       - RABBIT_MQ_PORT=5672
@@ -50,8 +51,8 @@ services:
       - RABBIT_USER=guest
       - STORAGE_TYPE=elasticsearch
       - ES_HOSTS=http://elasticsearch:9200
-    # docker-compose up:在rabbitmq启动之前启动zipkin
-    # docker-compose stop:在rabbitmq停止之前停止zipkin
+    # 1、docker-compose up:在rabbitmq启动之前启动zipkin
+    # 2、docker-compose stop:在rabbitmq停止之前停止zipkin
     depends_on:
       - rabbitmq
 
@@ -59,16 +60,22 @@ services:
     image: elasticsearch:alpine
     container_name: sc-elasticsearch
     restart: always
+    # 1、节点与其它节点共享了cluster.name就能加入集群当中
+    # 2、锁定物理内存地址，防止es内存被交换出去，也就是避免es使用swap交换分区，频繁的交换，会导致IOPS变高。
+    # 3、限制es进程启动占用的大小
+    # 4、换个节点名字，用处不大
     environment:
       - cluster.name=elasticsearch
       - bootstrap.memory_lock=true
       - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
       - node.name=elasticsearch_node_1
+    # 限制每个用户可使用的资源
     ulimits:
       memlock:
-        soft: -1
-        hard: -1
+        soft: -1 # 软限制:当超过限制值只会报警
+        hard: -1 # 硬限制:必定不能超过限制值
+    # 挂载数据库、配置和日志    
     volumes:
       - ./data/elasticsearch/data:/usr/share/elasticsearch/data
       - ./data/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
