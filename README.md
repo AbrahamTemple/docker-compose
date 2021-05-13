@@ -4,7 +4,7 @@
 
 > https://docs.docker.com/compose/compose-file/compose-file-v3/
 
-## 实际生产案例
+## 从实战案例中快速入门
 ``` yml
 # 声明compose版本
 version: '3'
