@@ -24,7 +24,7 @@ services:
     # 添加环境变量(一般是些连接参数)
     environment:
       - REDIS_PASSWORD=123456
-    # 要加入的网络
+    # 要加入的docker网络
     networks:
       - sc-net
     # 暴露的端口(本地端口:容器端口)
