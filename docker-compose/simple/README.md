@@ -45,8 +45,8 @@ services:
       - RABBIT_USER=guest
       - STORAGE_TYPE=elasticsearch
       - ES_HOSTS=http://elasticsearch:9200
-    # 1、docker-compose up:在rabbitmq启动之前启动zipkin
-    # 2、docker-compose stop:在rabbitmq停止之前停止zipkin
+    # 1、docker-compose up:在zipkin启动之前启动rabbitmq
+    # 2、docker-compose stop:在zipkin停止之前停止rabbitmq
     depends_on:
       - rabbitmq
 
