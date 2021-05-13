@@ -8,9 +8,9 @@
 # 声明compose版本
 version: '3'
 
-# 启动的服务
+# 声明启动的服务
 services:
-  # 定义redis
+  # 定义redis服务
   redis: 
     # 镜像名(dockerhub拉取的带版本号)
     image: redis:alpine
