@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  o-admin:
+    build:
+      context: ./olife-admin
+      dockerfile: Dockerfile
+    image: o-admin:0.0.1
+    container_name: olife-admin
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - JAVA_OPTS=-Xmx256M -Dspring.profiles.active=dev -Duser.timezone=GMT+08
+
+  o-websocket:
+    build:
+      context: ./olife-websocket
+      dockerfile: Dockerfile
+    image: o-websocket:0.0.1
+    container_name: olife-websocket
+    restart: always
+    ports:
+      - "8083:8083"
+    environment:
+      - JAVA_OPTS=-Xmx256M -Dspring.profiles.active=dev -Duser.timezone=GMT+08
+
+  o-gateway:
+    build:
+      context: ./olife-gateway
+      dockerfile: Dockerfile
+    image: o-gateway:0.0.1
+    container_name: olife-gateway
+    restart: always
+    ports:
+      - "8079:8079"
+    environment:
+      - JAVA_OPTS=-Xmx256M -Dspring.profiles.active=dev -Duser.timezone=GMT+08
